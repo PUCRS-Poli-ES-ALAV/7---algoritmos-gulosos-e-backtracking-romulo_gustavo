@@ -1,4 +1,4 @@
-public class troco {
+public class trocoDois {
     static int countItr = 0;
     public static void main(String[] args) {
         //int teste1 = 289;
@@ -28,18 +28,18 @@ public class troco {
                 vetor[0] += 1;
                 break;
             }
+            if (valor >= 50) {
+                valor -= 50;
+                vetor[1] += 1;
+                break;
+            }
             if (valor >= 25) {
                 valor -= 25;
-                vetor[1] += 1;
+                vetor[2] += 1;
                 break;
             }
             if (valor >= 10) {
                 valor -= 10;
-                vetor[2] += 1;
-                break;
-            }
-            if (valor >= 5) {
-                valor -= 5;
                 vetor[3] += 1;
                 break;
             }
