@@ -1,74 +1,41 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class somasubc {
 
     public static void main(String[] args) {
         int[] conjunto = {-7, -3, -2, 5, 8};
-
+        List<Integer> result = findZeroSumSubset(conjunto, 0, new ArrayList<>());
+        if (result != null && !result.isEmpty()) {
+            System.out.println("Subset with sum zero: " + result);
+        } else {
+            System.out.println("No non-empty subset sums to zero.");
+        }
     }
 
-    public static int[] somaUm (int[] c){
-        int[] resposta = {}; //n encontrado
-
-        ArrayList<Integer> teste = new ArrayList<>();
-        ArrayList<Integer> restante = new ArrayList<>();
-        for (int i = 0; i < c.length; i++) {
-            restante.add(c[i]);
+    
+    public static List<Integer> findZeroSumSubset(int[] nums, int idx, List<Integer> current) {
+        //not empty subsets
+        if (!current.isEmpty() && sum(current) == 0) {
+            return new ArrayList<>(current);
         }
-        somaRec(teste, restante, 0);
+        if (idx == nums.length) {
+            return null;
+        }
 
+        //add the number
+        current.add(nums[idx]);
+        List<Integer> found = findZeroSumSubset(nums, idx + 1, current);
+        if (found != null) return found;
+        //remove number (back tracking)
+        current.remove(current.size() - 1);
 
-        
-
-        return resposta;
+        return findZeroSumSubset(nums, idx + 1, current);
     }
 
-    public static ArrayList<Integer> somaRec (ArrayList<Integer> teste, ArrayList<Integer> restante, int idx){
-        while(j)
-        teste.add(restante.get(idx));
-        while(idx < restante.size()){
-            ArrayList<Integer> testado = somaRec(teste, restante, idx);
-            if(testeZero(testado)){
-                return testado;
-            }
-            idx++;
-        }
-        teste.remove(teste.size()-1);
-
-        ArrayList<Integer> naoDeu = new ArrayList<>();
-        return naoDeu;
-
-    }
-
-    public static boolean testeZero (ArrayList<Integer> a){
-        int soma = 0;
-        for(int i = 0; i < a.size(); i++){
-            soma+=a.get(i);
-        }
-
-        return soma == 0;
+    public static int sum(List<Integer> lst) {
+        int s = 0;
+        for (int n : lst) s += n;
+        return s;
     }
 }
-/*
- * {}
- * -7
- *      -3
- *          -2
- *              5
- *                  8       -colocar tudo n funciona
- *           -2
- *              8
- *       -3
- *           5
- *               8
- *       -3
- *           8
- * -7
- *     -2
- *         -3
- *              5
- * -7
- *      -2
- *           
- *                  
- */
